@@ -1,0 +1,17 @@
+environment: dev
+
+# path to the workers dierectory 
+workers:
+  path: /mnt/e/source/mahuri_hive/workers
+
+# path to the worksapace where the files are written durin the run process
+workspace: 
+    path: /mnt/e/mahubee_shared
+# db info
+database:
+    test: test@dgad@ak:22
+    test2: aakfjl@akjfka:33
+
+logger:
+    path: /mnt/e/mahubee_shared/logs/   
+    test: fasfasfasa@Afafa
