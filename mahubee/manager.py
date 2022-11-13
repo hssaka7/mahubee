@@ -1,26 +1,38 @@
 
+import os
 import uuid
 from .utils import parse_config
 
 class Manager():
-    def __init__(self,hive_config, worker_name, worker_config_path ):
-        manager_id = uuid.uuid4()
-        self.validate_hive_config(hive_config)
-        self._create_work_space(worker_name,worker_config_path, manager_id)
-        self.validate_worker_config(worker_name, worker_config_path)
+    def __init__(self,config, worker_name ):
+
+        self.manager_id = uuid.uuid4()
+        self.config= config
+
+        # TODO should be allowed to run more than one worker in parallel, but lets implement one first
+        self.worker_name = worker_name
+
+        
+
+        self._create_work_space()
+      
         
         # TODO create duties,
         # TODO create duties graph
         # TODO create workspace,
-        # TODO run each duty
-    def _create_work_space( target_name , duties_config_path, manager_id):
-        pass
-
-
-    def validate_hive_config(self, hive_config):
-        pass
         
-    
-    def validate_worker_config(self, worker_name, worker_config):
+    def _create_work_space(self):
+        workspace_path = self.config['workspace']['path']
+        print(workspace_path)
+        print("here")
+        
+        
+        # create workerspace directory
+
+        
+
+
+    def run ():
+        # TODO run each duty
         pass
 

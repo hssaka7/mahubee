@@ -2,16 +2,17 @@ environment: dev
 
 # path to the workers dierectory 
 workers:
-  path: /mnt/e/source/mahuri_hive/workers
+  path: /Users/aakashbasnet/development/python/projects/mahuri_hive/workers
 
 # path to the worksapace where the files are written durin the run process
 workspace: 
-    path: /mnt/e/mahubee_shared
+    path: /Users/aakashbasnet/development/python/projects/mahuri_hive/test/workspace
 # db info
+
 database:
     test: test@dgad@ak:22
     test2: aakfjl@akjfka:33
 
 logger:
-    path: /mnt/e/mahubee_shared/logs/   
+    path: /Users/aakashbasnet/development/python/projects/mahuri_hive/test/logs 
     test: fasfasfasa@Afafa

@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+# TODO file must be saved on the temp directoly, unless persisted. other should be deleted. How to delete?
+
 class FileState():
     def __init__(self,file_name, content):
         
