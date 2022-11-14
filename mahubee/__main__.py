@@ -23,12 +23,15 @@ def get_argsparser():
 def run():
     
     print("In main function")
-    args = vars(get_argsparser().parse_args())
-    
     # get hive config
     if 'mahubee_config' not in os.environ:
         raise Exception("No hive configuration passeed")
+
+    args = vars(get_argsparser().parse_args())
+
+    # TODO set up log directory here
     
+
     mahubee_config= parse_config(os.environ ['mahubee_config']) # TODO add or 'hive_config.yaml' as default
  
 
