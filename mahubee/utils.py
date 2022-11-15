@@ -10,9 +10,3 @@ def parse_config(config_path):
 
     return config or None
 
-
-# # Test
-
-if __name__ == "__main__":
-    tc = parse_config(f'/mnt/e/source/mahuri_hive/hive_config.yaml')
-    print("Sucess")

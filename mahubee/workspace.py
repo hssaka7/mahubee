@@ -3,9 +3,13 @@ from abc import ABC, abstractmethod
 # TODO file must be saved on the temp directoly, unless persisted. other should be deleted. How to delete?
 
 class FileState():
-    def __init__(self,file_name, content):
+    def __init__(self,file_name=None, content=None):
         
+        if  not (file_name and content):
+            # how to create empty file
+            print("Empty file")
         self.file_name = file_name
+        
         # need workspace folder
         temp_workspace_folder = '/mnt/e/source/mahuri_hive'
         self._file_path = f'{temp_workspace_folder}/{file_name}'

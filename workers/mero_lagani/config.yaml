@@ -1,4 +1,4 @@
-worker_name: mero_lagani
+feed_name: mero_lagani
 duties:
 - name: extract
   url: https://merolagani.com/CompanyDetail.aspx?symbol={symbol}

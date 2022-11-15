@@ -1,10 +1,13 @@
 
 import os
 import uuid
+
 from .utils import parse_config
+
 from .worker import Worker
 
 class Manager():
+    
     def __init__(self,config, worker_name ):
 
         self.manager_id = uuid.uuid4()
@@ -15,13 +18,10 @@ class Manager():
         
         self._create_work_space()
 
-        self._set_up_worker()
-        
-        # TODO create duties,
-        # TODO create duties graph
-        # TODO create workspace,
+        self._set_up_workers() 
         
     def _create_work_space(self):
+    
         
         workspace_path = self.config['workspace']['path']
         print(workspace_path)
@@ -37,24 +37,29 @@ class Manager():
             print("creating worker directory in workspace")
             os.mkdir(self.worker_workspcae_path)
     
-    def _set_up_worker(self):
+    def _set_up_workers(self):
+
+       # TODO can have more than one worker if the job is big and assign duties parallely
         worker_path = self.config['worker']['path']
+        worker_config = parse_config(f'{worker_path}/{self.worker_name}/config.yaml')
         worker = Worker(self.worker_name, worker_path,self.worker_workspcae_path)
+        
+        # TODO the duties can have its own iterator class based on the dependency 
+        duties_config = worker_config['duties']
+
+
+
+
+
+        # create_duty
+        # assign duty to the worker
+        # runt he duty and manang the workspace
+
         print("here")
-
-
-
-        
-    def create_dependency_graph(self):
-        # TODO creates the duties dependency graph, but to start with, do all in exact order.
-
-        pass
-
-        
 
 
     def run (self):
         # TODO run Workers
-        self._set_up_worker()
+    
 
 

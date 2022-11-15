@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
+from .workspace import FileState
+
+# TODO implement file state
 
 class Duty(ABC):
     def __init__(self, *args, **kwargs):
@@ -7,13 +10,13 @@ class Duty(ABC):
     
     @abstractmethod
     def start():
-        pass
+        return FileState([])
+        
 
 class Capture(Duty):
-    def start(self):
+    
+    def start(self, url):
         print("Starting duty")
+        # this should return the file state
 
-if __name__ == '__main__':
-    d = Capture()
-    d.start()
     
