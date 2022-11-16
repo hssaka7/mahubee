@@ -45,6 +45,7 @@ def run():
     # TODO vlaidate both env before passing it to manager
     
     hive_manager = Manager(mahubee_config, worker_name)
+    hive_manager.run()
     print("done")
 
 if __name__ == '__main__':

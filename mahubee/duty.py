@@ -19,7 +19,7 @@ class Duty(ABC):
         self.inputs = inputs
 
     @abstractmethod
-    def start():
+    def start(self):
         pass
 
     

@@ -6,7 +6,7 @@ from .utils import parse_config
 
 
 from .worker import Worker
-from .duty import Capture
+
 
 class Manager():
     
@@ -18,9 +18,6 @@ class Manager():
         # TODO should be allowed to run more than one worker in parallel, but lets implement one first
         self.worker_name = worker_name
         
-        self._create_work_space()
-
-        self._set_up_workers() 
         
     def _create_work_space(self):
     
@@ -38,49 +35,68 @@ class Manager():
             print(f"the worker directory does not exist in workspace: ")
             print("creating worker directory in workspace")
             os.mkdir(self.worker_workspcae_path)
+
+    def _create_duties(self):
+
+        
+        # TODO check if the depends vlaue is in duties name
+        # set of depends must be the subser of names
+         # TODO the duties can have its own iterator class based on the dependency 
+        
+        # create_duty
+
+        worker_path = self.config['worker']['path']
+        worker_config = parse_config(f'{worker_path}/{self.worker_name}/config.yaml')
+        duties_config = worker_config['duties']
+
+        duties_obj = []
+
+        for d_config in duties_config:
+            class_name_info= d_config['class_name']
+            file_name, class_name,*_= class_name_info.split('.')
+            
+            if file_name == 'mahubee':
+                mod = None
+                # TODO generic functions
+                pass
+
+            else:
+                # TODO workers path must be determined from the mahubee config
+
+                mod = __import__(f'workers.{self.worker_name}.{file_name}')
+                mod = getattr(mod,self.worker_name)
+                # feed should be parsed from the class name
+                mod = getattr(mod,file_name)
+                mod = getattr(mod,class_name)
+               
+            
+            duty_instance = mod(**d_config)
+            duties_obj.append(duty_instance)
+
+        return duties_obj
     
     def _set_up_workers(self):
 
        # TODO can have more than one worker if the job is big and assign duties parallely
+
         worker_path = self.config['worker']['path']
         worker_config = parse_config(f'{worker_path}/{self.worker_name}/config.yaml')
-        worker = Worker(self.worker_name, worker_path,self.worker_workspcae_path)
+
+        duties = self._create_duties()
         
-        # TODO the duties can have its own iterator class based on the dependency 
-        duties_config = worker_config['duties']
+        worker = Worker(self.worker_name, worker_path,self.worker_workspcae_path, duties)
 
-
-        # TODO check if the depends vlaue is in duties name
-        # set of depends must be the subser of names
-        duty_result_mapper = dict()
-
-        for d in duties_config:
-            # pass
-            mod = __import__(f'workers.{self.worker_name}.feed')
-            mod = getattr(mod,self.worker_name)
-            # feed should be parsed from the class name
-            mod = getattr(mod,'feed')
-
-            print("here")
-
-        duty_class_name = [(d_con['name'],dd_con['depends']) for d_con in duties_config]
+        return worker
         
-       
-
-
-
-
-
-        # create_duty
-        # assign duty to the worker
-        # runt he duty and manang the workspace
-
-        print("here")
-
 
     def run (self):
-        # TODO run Workers
-        pass
+        
+        self._create_work_space()
+        worker = self._set_up_workers() 
+        r = worker.run()
+        
+        print("Complete")
+
     
 
 

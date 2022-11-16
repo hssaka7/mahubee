@@ -9,29 +9,34 @@ from abc import ABC, abstractmethod
 
 class Bee(ABC):
     
-    def __init__(self, *args, **kwargs):
-        print("here")
-
+    
     # Factory method
     @abstractmethod
-    def set_duties(self):
+    def get_duties(self):
         pass
 
     # TODO duty running logic here
+    # dependency graph
+    # need to manage the 
     def run(self):
-        assignements = self.set_duties()
-        result = assignements.start()
+        assignements = self.get_duties()
+
+        
+
+        result = [assign.start() for assign in assignements]
         return result
 
 
 class Worker(Bee):
 
-    def __init__(self,worker_name, worker_folder_path, worker_workspace_path):
+    def __init__(self,worker_name, worker_folder_path, worker_workspace_path, duties):
         
         self.id = uuid.uuid4()
         self.name = worker_name
         self.worker_path = f"{worker_folder_path}/{self.name}"
         self.worker_workspace_path = worker_workspace_path
+        self.duties = duties
+        
         self._set_up_workspace()
       
 
@@ -53,8 +58,8 @@ class Worker(Bee):
    
 
     # factory method
-    def set_duties(self, duties):
+    def get_duties(self):
        
-        return duties
+        return self.duties
        
     
