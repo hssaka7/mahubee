@@ -2,7 +2,7 @@
 import os   
 import uuid
 
-from .utils import parse_config
+from .utils import parse_config, create_workspace_folder
 
 
 from .worker import Worker
@@ -52,8 +52,15 @@ class Manager():
         duties_obj = []
 
         for d_config in duties_config:
+           
+            duty_name = d_config['name']
             class_name_info= d_config['class_name']
             file_name, class_name,*_= class_name_info.split('.')
+
+            duty_workspace_path=f"{self.worker_workspcae_path}/{duty_name}"
+            
+            create_workspace_folder(duty_workspace_path)
+            d_config["_workspace_path"] = duty_workspace_path
             
             if file_name == 'mahubee':
                 mod = None
@@ -68,9 +75,10 @@ class Manager():
                 # feed should be parsed from the class name
                 mod = getattr(mod,file_name)
                 mod = getattr(mod,class_name)
-               
             
-            duty_instance = mod(**d_config)
+            
+            
+            duty_instance = mod (**d_config)
             duties_obj.append(duty_instance)
 
         return duties_obj

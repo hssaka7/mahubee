@@ -1,20 +1,25 @@
-import mahubee
+from mahubee import Duty, FileState
 
 
-class Extract(mahubee.Duty):
+
+class Extract(Duty):
     def start(self):
         print("on extract")
+        return 'extract result'
 
-class Save(mahubee.Duty):
+class Save(Duty):
     def start(self):
         print("on save")
+        return 'Save result'
 
 
-class Transform (mahubee.Duty):
+class Transform (Duty):
     def start(self):
         print ("on transform")
+        return 'Transform result'
 
-class Load (mahubee.Duty):
+class Load (Duty):
 
     def start(self):
         print("on load")
+        return 'Load result'

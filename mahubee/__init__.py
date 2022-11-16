@@ -1,2 +1,2 @@
-from .worker import Bee
 from .duty import Duty
+from .workspace import FileState
