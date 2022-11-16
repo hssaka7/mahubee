@@ -17,6 +17,7 @@ class Bee(ABC):
     def set_duties(self):
         pass
 
+    # TODO duty running logic here
     def run(self):
         assignements = self.set_duties()
         result = assignements.start()

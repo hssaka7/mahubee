@@ -8,7 +8,7 @@ setup(
     author_email = 'dummyemail@hahaha.com',
     url = 'www.google.com',
     lisence = '243123',
-    packages = find_packages(exclude=('tests', 'docs','workers')) #or, ['mahubee']
+    packages = find_packages(exclude=('tests', 'docs')) #or, ['mahubee']
     # entry_points = {
     #     'console_scripts': [
     #         'mahuri = mahuri.__main__:main'

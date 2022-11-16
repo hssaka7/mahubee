@@ -1,5 +1,5 @@
 import mahubee
-import requests
+
 
 class Extract(mahubee.Duty):
     def run():

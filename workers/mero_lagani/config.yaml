@@ -3,20 +3,20 @@ duties:
 - name: extract
   url: https://merolagani.com/CompanyDetail.aspx?symbol={symbol}
   symbols: [NIFRA, CGH]
-  class: feed.extract
+  class_name: feed.extract
   depends: []
 
 - name: save
-  class: feed.save
+  class_name: feed.save
   depends: [extract]
 
 - name: transform
-  class: feed.transform
+  class_name: feed.transform
   depends: [extract]
 
 - name: load
   database: honeycombs
-  class: feed.load
+  class_name: feed.load
   depends: [transform]
 
 

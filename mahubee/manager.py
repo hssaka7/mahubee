@@ -1,10 +1,12 @@
 
-import os
+import os   
 import uuid
 
 from .utils import parse_config
 
+
 from .worker import Worker
+from .duty import Capture
 
 class Manager():
     
@@ -48,6 +50,24 @@ class Manager():
         duties_config = worker_config['duties']
 
 
+        # TODO check if the depends vlaue is in duties name
+        # set of depends must be the subser of names
+        duty_result_mapper = dict()
+
+        for d in duties_config:
+            # pass
+            mod = __import__(f'workers.{self.worker_name}.feed')
+            mod = getattr(mod,self.worker_name)
+            # feed should be parsed from the class name
+            mod = getattr(mod,'feed')
+
+            print("here")
+
+        duty_class_name = [(d_con['name'],dd_con['depends']) for d_con in duties_config]
+        
+       
+
+
 
 
 
@@ -60,6 +80,7 @@ class Manager():
 
     def run (self):
         # TODO run Workers
+        pass
     
 
 
