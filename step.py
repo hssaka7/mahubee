@@ -9,9 +9,7 @@ class Step(ABC):
         
         self.name = kwargs['name']
         self.depends = kwargs['depends']
-        self.class_name = kwargs['class_name']
-        self.workspace_path = kwargs['_workspace_path']
-
+        
         self.config = kwargs
 
         self.inputs = []
